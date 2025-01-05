@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: finpower
+  datasource:
+    url: jdbc:mariadb://localhost:3306/mydb
+    username: root
+    password: 123456
+    driver-class-name: org.mariadb.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate.dialect: org.hibernate.dialect.MariaDBDialect
