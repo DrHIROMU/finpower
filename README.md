@@ -1,0 +1,2 @@
+# finpower
+Finance management system.
