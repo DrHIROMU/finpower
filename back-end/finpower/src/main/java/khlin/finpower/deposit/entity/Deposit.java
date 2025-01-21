@@ -1,17 +1,15 @@
 package khlin.finpower.deposit.entity;
 
 import jakarta.persistence.*;
+import khlin.finpower.common.entity.UserAccessibleEntity;
 import lombok.Data;
-
-import java.time.Instant;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 @Entity
-public class Deposit {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+@Table(name = "deposit")
+public class Deposit extends UserAccessibleEntity {
     @Column(name = "userId", nullable = false)
     private Long userId;
 
@@ -20,16 +18,4 @@ public class Deposit {
 
     @Column(name = "currency", nullable = false, length = 255)
     private String currency;
-
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private Instant createdAt;
-
-    @Column(name = "created_by", nullable = false, length = 255)
-    private String createdBy;
-
-    @Column(name = "updated_at", nullable = false)
-    private Instant updatedAt;
-
-    @Column(name = "updated_by", nullable = false, length = 255)
-    private String updatedBy;
 }

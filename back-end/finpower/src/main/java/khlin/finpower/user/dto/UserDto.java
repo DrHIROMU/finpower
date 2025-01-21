@@ -2,6 +2,7 @@ package khlin.finpower.user.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import khlin.finpower.user.enums.AccountStatus;
 import lombok.Data;
 
 @Data
@@ -17,6 +18,8 @@ public class UserDto {
 
     @NotBlank(message = "Password is required")
     private String password;
+
+    private AccountStatus accountStatus;
 
     @NotBlank(message = "Created by is required")
     private String createdBy;

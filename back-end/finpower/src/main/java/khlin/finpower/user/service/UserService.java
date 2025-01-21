@@ -2,29 +2,41 @@ package khlin.finpower.user.service;
 
 import khlin.finpower.user.dto.UserDto;
 import khlin.finpower.user.entity.User;
+import khlin.finpower.user.enums.AccountStatus;
 import khlin.finpower.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
+import java.util.List;
 
 @Service
 public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    public List<User> findUsers(){
+        return userRepository.findAll();
+    }
+
+    @Transactional
     public User createUser(UserDto userDto) {
         User user = new User();
         user.setFirstName(userDto.getFirstName());
         user.setLastName(userDto.getLastName());
         user.setEmail(userDto.getEmail());
         user.setPassword(userDto.getPassword());
+        user.setAccountStatus(AccountStatus.ACTIVE);
         user.setCreatedBy(userDto.getCreatedBy());
         user.setUpdatedBy(userDto.getUpdatedBy());
 
-        Instant now = Instant.now();
-        user.setCreatedAt(now);
-        user.setUpdatedAt(now);
+        return userRepository.save(user);
+    }
+
+    @Transactional
+    public User deactivateUser(String id){
+        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("User does not exist."));
 
         return userRepository.save(user);
     }
