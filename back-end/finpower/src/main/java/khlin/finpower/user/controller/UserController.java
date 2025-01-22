@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("users")
 public class UserController {
     @Autowired
     UserService userService;
@@ -28,7 +28,7 @@ public class UserController {
         return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
     }
 
-    @PostMapping("/{id}/deactivate")
+    @PostMapping("{id}/deactivate")
     public ResponseEntity<User> deactivateUser(@PathVariable String id) {
         User inactiveUser = userService.deactivateUser(id);
         return new ResponseEntity<>(inactiveUser, HttpStatus.OK);
