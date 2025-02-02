@@ -6,12 +6,17 @@ import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
   server: {
-    port: 4200
+    port: 4200,
   },
   preview: {
-    port: 8000
+    port: 8000,
   },
   css: {
+    preprocessorOptions: {
+      scss: {
+        api: "modern-compiler", // or "modern"
+      },
+    },
     postcss: {
       plugins: [tailwindcss, autoprefixer],
     },
