@@ -1,30 +1,12 @@
-import { redirect, Form } from "react-router";
+import { redirect } from "react-router";
 import type { Route } from "./+types/login";
+import AuthForm from "../components/AuthForm";
 
-export default function LoginPage(){
-  return <>
-  <Form method="post">
-    <div>
-      <label htmlFor="email">Email</label>
-      <input type="email" name="email" />
-    </div>
-    <div>
-      <label htmlFor="password">Password</label>
-      <input type="password" name="password" />
-    </div>    
-    <button type="submit">Login</button>
-  </Form>
-  </>
+export default function LoginPage() {
+  return <AuthForm />;
 }
 
-export async function loader(){    
-  if(false){
-    return redirect("/home");
-  }
-  return null;
-}
-
-export async function clientAction({request}:Route.ClientActionArgs){
+export async function clientAction({ request }: Route.ClientActionArgs) {
   const formData = await request.formData();
 
   const credentials = {
@@ -39,7 +21,7 @@ export async function clientAction({request}:Route.ClientActionArgs){
   });
 
   if (response.status === 422 || response.status === 401) {
-    return response;
+    return { errors: ["User email or password is wrong!"] };
   }
 
   if (!response.ok) {
@@ -59,5 +41,5 @@ export async function clientAction({request}:Route.ClientActionArgs){
   expiration.setHours(expiration.getHours() + 1);
   localStorage.setItem("expiration", expiration.toISOString());
 
-  return redirect("/home");
+  return redirect("/");
 }
