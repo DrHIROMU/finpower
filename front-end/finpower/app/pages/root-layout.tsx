@@ -1,20 +1,17 @@
 import { Outlet, Form } from "react-router";
-import Button from "@mui/material/Button";
-
-import classes from "./root-layout.module.scss";
 
 export default function RootLayout() {
   return (
-    <div className={classes.container}>
-      <header className={classes.header}>
+    <div className="">
+      <header className="">
         <Form method="post" action="/logout">
-          <Button variant="contained" type="submit">
+          <button type="submit">
             Logout
-          </Button>
+          </button>
         </Form>
       </header>
-      <aside className={classes.sidebar}>Side Bar</aside>
-      <main className={classes.main}>
+      <aside className="">Side Bar</aside>
+      <main className="">
         <Outlet />
       </main>
     </div>

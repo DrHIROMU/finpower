@@ -3,7 +3,11 @@ import type { Route } from "./+types/login";
 import AuthForm from "../components/AuthForm";
 
 export default function LoginPage() {
-  return <AuthForm />;
+  return (
+    <div className="flex items-center justify-center h-screen">
+      <AuthForm />
+    </div>
+  );
 }
 
 export async function clientAction({ request }: Route.ClientActionArgs) {
