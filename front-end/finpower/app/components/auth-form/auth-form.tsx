@@ -6,7 +6,7 @@ export default function AuthForm() {
 
   return (
     <Form
-      className="flex flex-col justify-center gap-4 bg-blue-300 h-72 w-80 rounded p-2"
+      className="flex flex-col justify-center gap-4 bg-gray-400 h-72 w-80 rounded p-2"
       method="post"
     >
       {data && data.errors && (
@@ -27,7 +27,7 @@ export default function AuthForm() {
       <div className="flex flex-row items-center justify-center h-12">
         <button
           type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer"
+          className="bg-gray-600 text-white px-4 py-2 rounded cursor-pointer"
         >
           Login
         </button>

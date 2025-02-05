@@ -1,6 +1,6 @@
 import { redirect } from "react-router";
 import type { Route } from "./+types/login";
-import AuthForm from "../components/AuthForm";
+import AuthForm from "../components/auth-form/auth-form";
 
 export default function LoginPage() {
   return (

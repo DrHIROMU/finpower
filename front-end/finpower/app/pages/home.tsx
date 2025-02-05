@@ -1,7 +1,10 @@
 import { Form, redirect } from "react-router";
 
+import { getJWT } from "~/utils/auth";
+
 export async function clientLoader() {
-  const token = localStorage.getItem("token");
+  const token = getJWT();
+
   if (!token) {
     return redirect("/login");
   }
