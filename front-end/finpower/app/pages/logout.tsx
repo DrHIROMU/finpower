@@ -16,7 +16,7 @@ export default function Logout() {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="size-6 stroke-cyan-500"
+          className="size-6 stroke-slate-200"
         >
           <path
             strokeLinecap="round"

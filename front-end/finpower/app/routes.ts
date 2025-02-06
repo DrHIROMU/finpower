@@ -9,7 +9,7 @@ import {
 export default [
   layout("pages/root-layout.tsx", [
     index("pages/home.tsx"),
-    route("user-management", "pages/user/user-management.tsx"),
+    route("users-management", "pages/user/users-management.tsx"),
   ]),
   route("logout", "pages/logout.tsx"),
   route("login", "pages/login.tsx"),

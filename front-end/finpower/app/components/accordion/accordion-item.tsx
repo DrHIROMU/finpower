@@ -1,6 +1,8 @@
+import { NavLink } from "react-router";
+
 export default function AccordionItem({
   title,
-  content,
+  functions,
   isOpen,
   onClick,
 }: AccordionItemProps) {
@@ -24,7 +26,9 @@ export default function AccordionItem({
           isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-50"
         }`}
       >
-        <div className="p-4 text-gray-700">{content}</div>
+        {functions.map((sysFunction) => (
+          <NavLink key={sysFunction.name} to={sysFunction.path}>{sysFunction.name}</NavLink>
+        ))}
       </div>
     </div>
   );
