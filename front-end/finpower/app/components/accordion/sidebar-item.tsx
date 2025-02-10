@@ -1,11 +1,11 @@
 import { NavLink } from "react-router";
 
-export default function AccordionItem({
+export default function SidebarItem({
   title,
   functions,
   isOpen,
   onClick,
-}: AccordionItemProps) {
+}: SidebarItemProps) {
   return (
     <div className="border-b border-gray-200 p-2">
       <button

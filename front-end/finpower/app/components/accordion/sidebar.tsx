@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router";
 
-import AccordionItem from "./accordion-item";
+import AccordionItem from "./sidebar-item";
 
-export default function Accordion() {
+export default function Sidebar() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [moduleFunctions, setModuleFunctions] = useState<Module[]>([]);
 

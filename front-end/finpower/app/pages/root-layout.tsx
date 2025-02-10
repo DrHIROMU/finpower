@@ -1,5 +1,5 @@
 import { Outlet } from "react-router";
-import Accordion from "~/components/accordion/accordion";
+import Accordion from "~/components/accordion/sidebar";
 import Logout from "./logout";
 
 export default function RootLayout() {
