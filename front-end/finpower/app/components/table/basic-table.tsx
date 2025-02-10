@@ -1,19 +1,20 @@
-import { useReducer, useState } from "react";
+import { useReducer } from "react";
 import {
-  createColumnHelper,
   flexRender,
   getCoreRowModel,
   useReactTable,
   type ColumnDef,
 } from "@tanstack/react-table";
 
-
 interface BasicTableProps<T extends object> {
   data: T[];
-  columns: ColumnDef<T>[];
+  columns: ColumnDef<T, any>[];
 }
 
-export function BasicTable<T extends object>({ data, columns }: BasicTableProps<T>) {
+export function BasicTable<T extends object>({
+  data,
+  columns,
+}: BasicTableProps<T>) {
   const rerender = useReducer(() => ({}), {})[1];
 
   const table = useReactTable({
