@@ -1,9 +1,11 @@
 package khlin.finpower.common.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.hibernate.annotations.UuidGenerator;
 
 import java.time.Instant;
 

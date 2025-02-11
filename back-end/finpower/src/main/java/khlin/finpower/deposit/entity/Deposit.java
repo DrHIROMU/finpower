@@ -1,6 +1,8 @@
 package khlin.finpower.deposit.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import khlin.finpower.common.entity.UserAccessibleEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
