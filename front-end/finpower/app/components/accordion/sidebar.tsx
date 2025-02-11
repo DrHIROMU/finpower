@@ -19,7 +19,7 @@ export default function Sidebar() {
       },
       {
         name: "System Management",
-        functions: [{ name: "Users Management", path: "users-management" }],
+        functions: [{ name: "Users Management", path: "users" }],
       },
     ]);
   }, []);

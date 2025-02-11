@@ -25,12 +25,15 @@ export function BasicTable<T extends object>({
 
   return (
     <div className="p-2">
-      <table>
-        <thead>
+      <table className="mt-5 mx-auto">
+        <thead className="bg-blue-500 text-white">
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
-                <th key={header.id}>
+                <th
+                  key={header.id}
+                  className="p-2 border-1 border-solid border-blue-200"
+                >
                   {header.isPlaceholder
                     ? null
                     : flexRender(
@@ -46,7 +49,10 @@ export function BasicTable<T extends object>({
           {table.getRowModel().rows.map((row) => (
             <tr key={row.id}>
               {row.getVisibleCells().map((cell) => (
-                <td key={cell.id}>
+                <td
+                  key={cell.id}
+                  className="border-1 border-solid border-gray-400 text-center"
+                >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}
@@ -71,9 +77,6 @@ export function BasicTable<T extends object>({
         </tfoot>
       </table>
       <div className="h-4" />
-      <button onClick={() => rerender()} className="border p-2">
-        Rerender
-      </button>
     </div>
   );
 }

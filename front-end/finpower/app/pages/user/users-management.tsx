@@ -2,7 +2,8 @@ import { getUsers } from "~/api/user/user-api";
 import { BasicTable } from "~/components/table/basic-table";
 import type { Route } from "./+types/users-management";
 import { createColumnHelper } from "@tanstack/react-table";
-import { Navigate } from "react-router";
+import { NavLink } from "react-router";
+import { formatDateTime } from "~/utils/date-utils";
 
 export async function clientLoader() {
   const users = await getUsers();
@@ -35,7 +36,7 @@ export default function UsersManagement({ loaderData }: Route.ComponentProps) {
     }),
     columnHelper.accessor("createdAt", {
       header: "Created Time",
-      cell: (info) => info.getValue(),
+      cell: (info) => <>{formatDateTime(info.getValue())}</>,
       footer: (info) => info.column.id,
     }),
     columnHelper.accessor("createdBy", {
@@ -46,7 +47,12 @@ export default function UsersManagement({ loaderData }: Route.ComponentProps) {
     columnHelper.accessor("id", {
       header: "Action",
       cell: (info) => (
-        <button className="w-10 h-10 rounded bg-amber-300">Text</button>
+        <NavLink
+          className="inline-block px-4 py-2 bg-amber-500 text-white text-center text-base font-semibold rounded hover:bg-amber-600"
+          to={`${info.getValue()}/edit`}
+        >
+          Edit
+        </NavLink>
       ),
       footer: (info) => info.column.id,
     }),

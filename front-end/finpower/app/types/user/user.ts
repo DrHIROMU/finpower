@@ -4,6 +4,6 @@ type User = {
   lastName: string;
   email: string;
   accountStatus: string;
-  createdAt: Date;
+  createdAt: string;
   createdBy: string;
 };
