@@ -26,7 +26,7 @@ export function BasicTable<T extends object>({
   return (
     <div className="p-2">
       <table className="mt-5 mx-auto">
-        <thead className="bg-blue-500 text-white">
+        <thead className="bg-sky-700 text-white">
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
@@ -51,7 +51,7 @@ export function BasicTable<T extends object>({
               {row.getVisibleCells().map((cell) => (
                 <td
                   key={cell.id}
-                  className="border-1 border-solid border-gray-400 text-center"
+                  className="border-1 p-1 border-solid border-gray-400 text-center"
                 >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>

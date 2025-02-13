@@ -28,9 +28,15 @@ public class UserController {
         return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
     }
 
-    @PostMapping("{id}/deactivate")
-    public ResponseEntity<User> deactivateUser(@PathVariable String id) {
-        User inactiveUser = userService.deactivateUser(id);
+    @PatchMapping("{id}/disable")
+    public ResponseEntity<User> disableUser(@PathVariable String id) {
+        User inactiveUser = userService.disableUser(id);
+        return new ResponseEntity<>(inactiveUser, HttpStatus.OK);
+    }
+
+    @PatchMapping("{id}/activate")
+    public ResponseEntity<User> activateUser(@PathVariable String id) {
+        User inactiveUser = userService.activateUser(id);
         return new ResponseEntity<>(inactiveUser, HttpStatus.OK);
     }
 }

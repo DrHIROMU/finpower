@@ -1,4 +1,4 @@
-import { getUsers } from "~/api/user/user-api";
+import { getUsers, disableUser, activateUser } from "~/api/user/user-api";
 import { BasicTable } from "~/components/table/basic-table";
 import type { Route } from "./+types/users-management";
 import { createColumnHelper } from "@tanstack/react-table";
@@ -12,6 +12,15 @@ export async function clientLoader() {
 
 export default function UsersManagement({ loaderData }: Route.ComponentProps) {
   const columnHelper = createColumnHelper<User>();
+
+  const handleUserStatusChange = async (id: string, userStatus: string) => {
+    let users;
+    if(userStatus === "ACTIVE"){
+      users = await disableUser(id);
+    }else if(userStatus === "INACTIVE"){
+      users = await activateUser(id);
+    }
+  };
 
   const columns = [
     columnHelper.accessor("firstName", {
@@ -47,12 +56,25 @@ export default function UsersManagement({ loaderData }: Route.ComponentProps) {
     columnHelper.accessor("id", {
       header: "Action",
       cell: (info) => (
-        <NavLink
-          className="inline-block px-4 py-2 bg-amber-500 text-white text-center text-base font-semibold rounded hover:bg-amber-600"
-          to={`${info.getValue()}/edit`}
-        >
-          Edit
-        </NavLink>
+        <div className="flex gap-2">
+          <NavLink
+            className="inline-block px-4 py-1 bg-sky-600 text-white text-center text-base font-semibold rounded hover:bg-sky-700"
+            to={`${info.getValue()}/edit`}
+          >
+            Edit
+          </NavLink>
+          <button
+            type="button"
+            className="px-4 py-1 bg-rose-500 text-white text-center text-base font-semibold rounded hover:bg-red-700 cursor-pointer"
+            onClick={() => {
+              handleUserStatusChange(info.getValue(), info.row.getValue("accountStatus"));
+            }}
+          >
+            {info.row.getValue("accountStatus") === "ACTIVE"
+              ? "Disable"
+              : "Activate"}
+          </button>
+        </div>
       ),
       footer: (info) => info.column.id,
     }),

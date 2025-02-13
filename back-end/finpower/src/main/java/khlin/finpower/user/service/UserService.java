@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Instant;
 import java.util.List;
 
 @Service
@@ -34,8 +35,19 @@ public class UserService {
     }
 
     @Transactional
-    public User deactivateUser(String id){
+    public User disableUser(String id){
         User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("User does not exist."));
+        user.setAccountStatus(AccountStatus.INACTIVE);
+        user.setUpdatedBy("system");
+
+        return userRepository.save(user);
+    }
+
+    @Transactional
+    public User activateUser(String id){
+        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("User does not exist."));
+        user.setAccountStatus(AccountStatus.ACTIVE);
+        user.setUpdatedBy("system");
 
         return userRepository.save(user);
     }
