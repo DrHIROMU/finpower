@@ -2,6 +2,7 @@ package khlin.finpower.user.controller;
 
 import jakarta.validation.Valid;
 import khlin.finpower.user.dto.UserDto;
+import khlin.finpower.user.dto.UserUpdateRequest;
 import khlin.finpower.user.entity.User;
 import khlin.finpower.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,15 +29,9 @@ public class UserController {
         return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
     }
 
-    @PatchMapping("{id}/disable")
-    public ResponseEntity<User> disableUser(@PathVariable String id) {
-        User inactiveUser = userService.disableUser(id);
-        return new ResponseEntity<>(inactiveUser, HttpStatus.OK);
-    }
-
-    @PatchMapping("{id}/activate")
-    public ResponseEntity<User> activateUser(@PathVariable String id) {
-        User inactiveUser = userService.activateUser(id);
-        return new ResponseEntity<>(inactiveUser, HttpStatus.OK);
+    @PatchMapping("{id}/status")
+    public ResponseEntity<User> updateUserStatus(@PathVariable String id, @RequestBody UserUpdateRequest userUpdateRequest) {
+        User updatedUser = userService.changeUserStatus(id, userUpdateRequest.getAccountStatus());
+        return new ResponseEntity<>(updatedUser, HttpStatus.OK);
     }
 }
