@@ -26,7 +26,7 @@ export function BasicTable<T extends object>({
   return (
     <div className="p-2">
       <table className="mt-5 mx-auto">
-        <thead className="bg-sky-700 text-white">
+        <thead className="bg-cyan-700 text-white">
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
@@ -59,22 +59,6 @@ export function BasicTable<T extends object>({
             </tr>
           ))}
         </tbody>
-        <tfoot>
-          {table.getFooterGroups().map((footerGroup) => (
-            <tr key={footerGroup.id}>
-              {footerGroup.headers.map((header) => (
-                <th key={header.id}>
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(
-                        header.column.columnDef.footer,
-                        header.getContext()
-                      )}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </tfoot>
       </table>
       <div className="h-4" />
     </div>
