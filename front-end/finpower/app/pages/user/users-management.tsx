@@ -1,20 +1,36 @@
 import { getUsers, changeUserStatus } from "~/api/user/user-api";
 import { BasicTable } from "~/components/table/basic-table";
 import { createColumnHelper } from "@tanstack/react-table";
-import { NavLink } from "react-router";
+import { Form, NavLink } from "react-router";
 import { useState } from "react";
 
 import type { Route } from "./+types/users-management";
 import { formatDateTime } from "~/utils/date-utils";
 import type { User } from "~/types/user/user";
 import { AccountStatus } from "~/types/user/user";
+import type { QueryUserRequest } from "~/types/user/query-user-request";
+import { getFormStringValue } from "~/utils/form-utils";
 
 export async function clientLoader() {
   const users = await getUsers();
   return users;
 }
 
+export async function clientAction({ request }: Route.ClientActionArgs) {
+  let formData = await request.formData();
+  let intent = formData.get("intent");
+
+  const queryRequest: QueryUserRequest = {
+    firstName: getFormStringValue(formData, "firstName"),
+    lastName: getFormStringValue(formData, "lastName"),
+    email: getFormStringValue(formData, "email"),
+    accountStatus: getFormStringValue(formData, "accountStatus"),
+  };
+  console.log(queryRequest, intent);
+}
+
 export default function UsersManagement({ loaderData }: Route.ComponentProps) {
+  const [accountStatus, setAccountStatus] = useState<object | null>();
   const [users, setUsers] = useState<User[]>(loaderData);
   const columnHelper = createColumnHelper<User>();
 
@@ -38,6 +54,11 @@ export default function UsersManagement({ loaderData }: Route.ComponentProps) {
       console.log(error);
       //TODO modal to show error
     }
+  };
+
+  const handleResetForm = () => {
+    console.log("reset");
+    console.log(accountStatus);
   };
 
   const columns = [
@@ -104,6 +125,29 @@ export default function UsersManagement({ loaderData }: Route.ComponentProps) {
   return (
     <>
       User Management
+      <Form method="post" className="bg-gray-200">
+        <label htmlFor="first-name">First Name</label>
+        <input id="first-name" name="firstName" className="w-64" type="text" />
+        <label htmlFor="last-name">Last Name</label>
+        <input id="last-name" name="lastName" className="w-64" type="text" />
+        <label htmlFor="email">Email</label>
+        <input id="email" name="email" className="w-64" type="text" />
+        <label htmlFor="account-status">Status</label>
+        <select id="account-status" name="accountStatus" className="w-64">
+          <option value="1">ACTIVE</option>
+          <option value="0">INACTIVE</option>
+        </select>
+
+        <div className="flex gap-2 mt-10">
+          <button type="submit" name="intent" value="query">
+            Query
+          </button>
+          <button onClick={handleResetForm}>Reset</button>
+          <button type="submit" name="intent" value="export">
+            Export
+          </button>
+        </div>
+      </Form>
       <BasicTable data={users} columns={columns} />
     </>
   );
