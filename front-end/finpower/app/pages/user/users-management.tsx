@@ -26,11 +26,15 @@ export async function clientAction({ request }: Route.ClientActionArgs) {
     email: getFormStringValue(formData, "email"),
     accountStatus: getFormStringValue(formData, "accountStatus"),
   };
-  console.log(queryRequest, intent);
+
+  if(intent === "query"){
+
+  }else if(intent === "export"){
+
+  }
 }
 
 export default function UsersManagement({ loaderData }: Route.ComponentProps) {
-  const [accountStatus, setAccountStatus] = useState<object | null>();
   const [users, setUsers] = useState<User[]>(loaderData);
   const columnHelper = createColumnHelper<User>();
 
@@ -54,11 +58,6 @@ export default function UsersManagement({ loaderData }: Route.ComponentProps) {
       console.log(error);
       //TODO modal to show error
     }
-  };
-
-  const handleResetForm = () => {
-    console.log("reset");
-    console.log(accountStatus);
   };
 
   const columns = [
@@ -104,7 +103,7 @@ export default function UsersManagement({ loaderData }: Route.ComponentProps) {
           </NavLink>
           <button
             type="button"
-            className="px-4 py-1 bg-rose-700 text-white text-center text-base font-semibold rounded hover:bg-red-700 cursor-pointer"
+            className="px-4 py-1 bg-rose-700 text-white text-center text-base font-semibold rounded hover:bg-red-800 cursor-pointer"
             onClick={() => {
               handleUserStatusChange(
                 info.getValue(),
@@ -188,8 +187,9 @@ export default function UsersManagement({ loaderData }: Route.ComponentProps) {
               name="accountStatus"
               className="w-full p-2 border bg-white hover:bg-gray-50 border-gray-300 rounded-md focus:outline-none focus:ring-gray-500 focus:border-gray-500"
             >
-              <option value="1">ACTIVE</option>
-              <option value="0">INACTIVE</option>
+              <option value="">ALL</option>
+              <option value="ACTIVE">ACTIVE</option>
+              <option value="INACTIVE">INACTIVE</option>
             </select>
           </div>
         </div>
@@ -199,21 +199,15 @@ export default function UsersManagement({ loaderData }: Route.ComponentProps) {
             type="submit"
             name="intent"
             value="query"
-            className="px-4 py-2 bg-cyan-700 text-white rounded-md hover:bg-cyan-800"
+            className="px-4 py-2 bg-cyan-700 text-white rounded-md hover:bg-cyan-800 cursor-pointer"
           >
             Query
-          </button>
-          <button
-            className="px-4 py-2 bg-cyan-700 text-white rounded-md hover:bg-cyan-800"
-            onClick={handleResetForm}
-          >
-            Reset
           </button>
           <button
             type="submit"
             name="intent"
             value="export"
-            className="px-4 py-2 bg-cyan-700 text-white rounded-md hover:bg-cyan-800"
+            className="px-4 py-2 bg-cyan-700 text-white rounded-md hover:bg-cyan-800 cursor-pointer"
           >
             Export
           </button>
