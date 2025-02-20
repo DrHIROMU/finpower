@@ -125,25 +125,96 @@ export default function UsersManagement({ loaderData }: Route.ComponentProps) {
   return (
     <>
       User Management
-      <Form method="post" className="bg-gray-200">
-        <label htmlFor="first-name">First Name</label>
-        <input id="first-name" name="firstName" className="w-64" type="text" />
-        <label htmlFor="last-name">Last Name</label>
-        <input id="last-name" name="lastName" className="w-64" type="text" />
-        <label htmlFor="email">Email</label>
-        <input id="email" name="email" className="w-64" type="text" />
-        <label htmlFor="account-status">Status</label>
-        <select id="account-status" name="accountStatus" className="w-64">
-          <option value="1">ACTIVE</option>
-          <option value="0">INACTIVE</option>
-        </select>
+      <Form
+        method="post"
+        className="bg-gray-100 max-w-6xl mx-auto p-6 shadow-md rounded-lg"
+      >
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-4">
+          <div>
+            <label
+              htmlFor="first-name"
+              className="block text-sm font-medium text-gray-700"
+            >
+              First Name
+            </label>
+            <input
+              id="first-name"
+              name="firstName"
+              className="w-full p-2 border bg-white hover:bg-gray-50 border-gray-300 rounded-md focus:outline-none focus:border-gray-400 focus:ring focus:ring-gray-300 
+"
+              type="text"
+            />
+          </div>
 
-        <div className="flex gap-2 mt-10">
-          <button type="submit" name="intent" value="query">
+          <div>
+            <label
+              htmlFor="last-name"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Last Name
+            </label>
+            <input
+              id="last-name"
+              name="lastName"
+              className="w-full p-2 border bg-white hover:bg-gray-50 border-gray-300 rounded-md focus:outline-none focus:border-gray-400 focus:ring focus:ring-gray-300 "
+              type="text"
+            />
+          </div>
+
+          <div>
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Email
+            </label>
+            <input
+              id="email"
+              name="email"
+              className="w-full p-2 border bg-white hover:bg-gray-50 border-gray-300 rounded-md focus:outline-none focus:border-gray-400 focus:ring focus:ring-gray-300 "
+              type="text"
+            />
+          </div>
+
+          <div>
+            <label
+              htmlFor="account-status"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Status
+            </label>
+            <select
+              id="account-status"
+              name="accountStatus"
+              className="w-full p-2 border bg-white hover:bg-gray-50 border-gray-300 rounded-md focus:outline-none focus:ring-gray-500 focus:border-gray-500"
+            >
+              <option value="1">ACTIVE</option>
+              <option value="0">INACTIVE</option>
+            </select>
+          </div>
+        </div>
+
+        <div className="flex justify-center gap-2 mt-6">
+          <button
+            type="submit"
+            name="intent"
+            value="query"
+            className="px-4 py-2 bg-cyan-700 text-white rounded-md hover:bg-cyan-800"
+          >
             Query
           </button>
-          <button onClick={handleResetForm}>Reset</button>
-          <button type="submit" name="intent" value="export">
+          <button
+            className="px-4 py-2 bg-cyan-700 text-white rounded-md hover:bg-cyan-800"
+            onClick={handleResetForm}
+          >
+            Reset
+          </button>
+          <button
+            type="submit"
+            name="intent"
+            value="export"
+            className="px-4 py-2 bg-cyan-700 text-white rounded-md hover:bg-cyan-800"
+          >
             Export
           </button>
         </div>
