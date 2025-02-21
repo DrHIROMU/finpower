@@ -1,5 +1,20 @@
-export function getUsers() {
-  const users = fetch("http://localhost:8080/users").then((res) => res.json());
+import type { SearchUserRequest } from "~/types/user/search-user-request";
+
+export async function getUsers() {
+  const response = await fetch("http://localhost:8080/users");
+  const users = await response.json();
+  return users;
+}
+
+export async function searchUsers(conditions: SearchUserRequest) {
+  const response = await fetch("http://localhost:8080/users/search", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(conditions),
+  });
+  const users = await response.json();
   return users;
 }
 

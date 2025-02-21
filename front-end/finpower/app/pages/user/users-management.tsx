@@ -1,14 +1,14 @@
-import { getUsers, changeUserStatus } from "~/api/user/user-api";
+import { getUsers, changeUserStatus, searchUsers } from "~/api/user/user-api";
 import { BasicTable } from "~/components/table/basic-table";
 import { createColumnHelper } from "@tanstack/react-table";
-import { Form, NavLink } from "react-router";
-import { useState } from "react";
+import { Form, NavLink, useActionData } from "react-router";
+import { useEffect, useState } from "react";
 
 import type { Route } from "./+types/users-management";
 import { formatDateTime } from "~/utils/date-utils";
 import type { User } from "~/types/user/user";
 import { AccountStatus } from "~/types/user/user";
-import type { QueryUserRequest } from "~/types/user/query-user-request";
+import type { SearchUserRequest } from "~/types/user/search-user-request";
 import { getFormStringValue } from "~/utils/form-utils";
 
 export async function clientLoader() {
@@ -20,7 +20,7 @@ export async function clientAction({ request }: Route.ClientActionArgs) {
   let formData = await request.formData();
   let intent = formData.get("intent");
 
-  const queryRequest: QueryUserRequest = {
+  const conditions: SearchUserRequest = {
     firstName: getFormStringValue(formData, "firstName"),
     lastName: getFormStringValue(formData, "lastName"),
     email: getFormStringValue(formData, "email"),
@@ -28,15 +28,22 @@ export async function clientAction({ request }: Route.ClientActionArgs) {
   };
 
   if(intent === "query"){
-
+    return await searchUsers(conditions);
   }else if(intent === "export"){
 
   }
 }
 
-export default function UsersManagement({ loaderData }: Route.ComponentProps) {
+export default function UsersManagement({ loaderData }: Route.ComponentProps, ) {
   const [users, setUsers] = useState<User[]>(loaderData);
   const columnHelper = createColumnHelper<User>();
+  const actionData = useActionData();
+
+  console.log(actionData);
+
+  // useEffect(() => {
+  //   setUsers(actionData);
+  // }, [actionData]);
 
   const handleUserStatusChange = async (id: string, userStatus: string) => {
     try {
@@ -188,8 +195,8 @@ export default function UsersManagement({ loaderData }: Route.ComponentProps) {
               className="w-full p-2 border bg-white hover:bg-gray-50 border-gray-300 rounded-md focus:outline-none focus:ring-gray-500 focus:border-gray-500"
             >
               <option value="">ALL</option>
-              <option value="ACTIVE">ACTIVE</option>
-              <option value="INACTIVE">INACTIVE</option>
+              <option value="1">ACTIVE</option>
+              <option value="0">INACTIVE</option>
             </select>
           </div>
         </div>

@@ -4,6 +4,6 @@ import khlin.finpower.user.enums.AccountStatus;
 import lombok.Data;
 
 @Data
-public class UserUpdateRequest {
+public class UpdateUserRequest {
     private AccountStatus accountStatus;
 }

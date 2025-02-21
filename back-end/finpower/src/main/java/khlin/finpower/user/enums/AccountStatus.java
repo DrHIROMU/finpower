@@ -1,5 +1,6 @@
 package khlin.finpower.user.enums;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import khlin.finpower.common.enums.EntityFieldEnumBase;
 
 public enum AccountStatus implements EntityFieldEnumBase<String> {
@@ -16,6 +17,7 @@ public enum AccountStatus implements EntityFieldEnumBase<String> {
         return code;
     }
 
+    @JsonCreator
     public static AccountStatus fromCode(String code) {
         if(code == null) return null;
 

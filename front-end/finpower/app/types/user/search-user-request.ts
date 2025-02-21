@@ -1,4 +1,4 @@
-export type QueryUserRequest = {
+export type SearchUserRequest = {
   firstName: string;
   lastName: string;
   email: string;

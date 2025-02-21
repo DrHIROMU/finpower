@@ -6,7 +6,7 @@ import khlin.finpower.user.enums.AccountStatus;
 import lombok.Data;
 
 @Data
-public class UserDto {
+public class CreateUserRequest {
     @NotBlank(message = "First name is required")
     private String firstName;
 
