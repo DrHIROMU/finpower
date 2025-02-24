@@ -37,13 +37,13 @@ export async function clientAction({ request }: Route.ClientActionArgs) {
 export default function UsersManagement({ loaderData }: Route.ComponentProps, ) {
   const [users, setUsers] = useState<User[]>(loaderData);
   const columnHelper = createColumnHelper<User>();
-  const actionData = useActionData();
+  const actionData = useActionData<User[]>();
 
-  console.log(actionData);
-
-  // useEffect(() => {
-  //   setUsers(actionData);
-  // }, [actionData]);
+  useEffect(() => {
+    if(actionData){
+      setUsers(actionData);
+    }    
+  }, [actionData]);
 
   const handleUserStatusChange = async (id: string, userStatus: string) => {
     try {
