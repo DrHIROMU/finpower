@@ -12,12 +12,12 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<User, String> {
     @Query(value = " select * from user" +
-            "        where first_name = :firstName " +
-            "        and last_name = :lastName " +
-            "        and email = :email " +
-            "        and account_status = :accountStatus "
+            "        where coalesce(:firstName, first_name) = first_name" +
+            "        and coalesce(:lastName, last_name) = last_name" +
+            "        and coalesce(:email, email) = email " +
+            "        and coalesce(:accountStatus, account_status) = account_status "
             , nativeQuery = true)
-    List<User> findUsersByConditions(String firstName, String lastName, String email, AccountStatus accountStatus);
+    List<User> findUsersByConditions(String firstName, String lastName, String email, String accountStatus);
 
     Optional<User> findByEmailAndPassword(String email, String password);
 }

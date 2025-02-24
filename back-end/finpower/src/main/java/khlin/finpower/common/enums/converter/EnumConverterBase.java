@@ -3,6 +3,8 @@ package khlin.finpower.common.enums.converter;
 import jakarta.persistence.AttributeConverter;
 import khlin.finpower.common.enums.EntityFieldEnumBase;
 
+import java.util.Arrays;
+
 public abstract class EnumConverterBase<T extends Enum<T> & EntityFieldEnumBase<E>, E> implements
         AttributeConverter<T, E> {
     private final Class<T> enumClass;
@@ -21,13 +23,9 @@ public abstract class EnumConverterBase<T extends Enum<T> & EntityFieldEnumBase<
         if (enumCode == null) {
             return null;
         }
-
-        T[] enums = enumClass.getEnumConstants();
-        for (T e : enums) {
-            if (e.getCode().equals(enumCode)) {
-                return e;
-            }
-        }
-        return null;
+        return Arrays.stream(enumClass.getEnumConstants())
+                .filter(e -> e.getCode().equals(enumCode))
+                .findFirst()
+                .orElse(null);
     }
 }

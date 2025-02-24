@@ -25,7 +25,7 @@ public class UserService {
                 searchUserRequest.getFirstName()
                 , searchUserRequest.getLastName()
                 , searchUserRequest.getEmail()
-                , searchUserRequest.getAccountStatus());
+                , searchUserRequest.getAccountStatus() != null ? searchUserRequest.getAccountStatus().getCode() : null);
     }
 
     @Transactional
