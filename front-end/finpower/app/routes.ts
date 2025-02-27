@@ -16,6 +16,13 @@ export default [
         route("edit", "pages/user/edit-user.tsx"),
       ]),
     ]),
+    ...prefix("assets", [
+      index("pages/asset/asset-overview.tsx"),
+      ...prefix("stock",[
+        index("pages/asset/stock/stock-asset-overview.tsx"),
+        route("trade", "pages/asset/stock/trade-stock.tsx"),
+      ])      
+    ]),
   ]),
   route("logout", "pages/logout.tsx"),
   route("login", "pages/login.tsx"),

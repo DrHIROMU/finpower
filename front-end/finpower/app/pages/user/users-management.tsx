@@ -103,7 +103,7 @@ export default function UsersManagement({ loaderData }: Route.ComponentProps, ) 
       cell: (info) => (
         <div className="flex gap-2">
           <NavLink
-            className="inline-block px-4 py-1 bg-teal-700 text-white text-center text-base font-semibold rounded hover:bg-sky-700"
+            className="inline-block px-4 py-1 bg-teal-700 text-white text-center text-base font-semibold rounded hover:bg-teal-800"
             to={`${info.getValue()}/edit`}
           >
             Edit

@@ -14,8 +14,8 @@ export default function Sidebar() {
     console.log("get menu");
     setModuleFunctions([
       {
-        name: "Assets Information",
-        functions: [{ name: "Assets Information", path: "assets-information" }],
+        name: "Assets",
+        functions: [{ name: "Assets Overview", path: "assets" }],
       },
       {
         name: "System Management",
