@@ -1,6 +1,6 @@
 export type TradeStockRequest = {
-  market: StockMarket;
-  type: TradeType;
+  market: string;
+  type: string;
   stockCode: string;
   price: number;
   quantity: number;

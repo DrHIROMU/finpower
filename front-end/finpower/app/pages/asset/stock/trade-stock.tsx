@@ -1,4 +1,24 @@
 import { Form } from "react-router";
+import type { Route } from "./+types/trade-stock";
+import type { TradeStockRequest } from "~/types/asset/stock/trade-stock-request";
+import { getFormStringValue, getFormNumberValue } from "~/utils/form-utils";
+
+export async function clientAction({ request }: Route.ClientActionArgs) {
+  let formData = await request.formData();
+  
+  const tradeStockRequest: TradeStockRequest = {
+    market: getFormStringValue(formData, "market"),
+    type: getFormStringValue(formData, "type"),
+    stockCode: getFormStringValue(formData, "stockCode"),
+    price: getFormNumberValue(formData, "price"),
+    quantity: getFormNumberValue(formData, "quantity"),
+    date: getFormStringValue(formData, "date"),
+    note: getFormStringValue(formData, "note"),
+  };
+  
+  console.log(tradeStockRequest);
+
+}
 
 export default function TradeStock() {
   return (
@@ -27,16 +47,23 @@ export default function TradeStock() {
           </div>
 
           <div>
-            <label
-              htmlFor="Type"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Type
-            </label>
-            <input type="radio" id="buy" name="type" value="BUY" />
-            <label htmlFor="buy">Buy</label>
-            <input type="radio" id="sell" name="type" value="SELL" />
-            <label htmlFor="sell">Sell</label>
+            <span className="block text-sm font-medium text-gray-700">Type</span>
+            <div className="mt-2 flex gap-4">
+              <label className="cursor-pointer flex items-center">
+                <input type="radio" name="type" value="BUY" className="peer hidden" />
+                <div className="w-4 h-4 rounded-full border border-gray-300 flex items-center justify-center peer-checked:bg-cyan-600">
+                  <div className="w-2 h-2 rounded-full bg-white hidden peer-checked:block"></div>
+                </div>
+                <span className="ml-2 text-sm font-medium text-gray-700">Buy</span>
+              </label>
+              <label className="cursor-pointer flex items-center">
+                <input type="radio" name="type" value="SELL" className="peer hidden" />
+                <div className="w-4 h-4 rounded-full border border-gray-300 flex items-center justify-center peer-checked:bg-cyan-600">
+                  <div className="w-2 h-2 rounded-full bg-white hidden peer-checked:block"></div>
+                </div>
+                <span className="ml-2 text-sm font-medium text-gray-700">Sell</span>
+              </label>
+            </div>
           </div>
           <div></div>
 
@@ -120,11 +147,9 @@ export default function TradeStock() {
         <div className="flex justify-center gap-2 mt-6">
           <button
             type="submit"
-            name="intent"
-            value="query"
             className="px-4 py-2 bg-cyan-700 text-white rounded-md hover:bg-cyan-800 cursor-pointer"
           >
-            Query
+            Submit
           </button>
         </div>
       </Form>
