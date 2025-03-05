@@ -1,6 +1,6 @@
 spring:
   application:
-    name: finpower
+    name: finpowerAPI
   datasource:
     url: jdbc:mariadb://localhost:3306/mydb
     username: root
@@ -17,6 +17,12 @@ spring:
           time_zone: UTC
   jackson:
     time-zone: UTC
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "prometheus,health,info"
 
 springdoc:
   api-docs:
