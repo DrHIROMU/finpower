@@ -1,7 +1,7 @@
 export type TradeStockRequest = {
   market: string;
-  type: string;
-  stockCode: string;
+  tradeType: string;
+  stockSymbol: string;
   price: number;
   quantity: number;
   date: string;
