@@ -2,9 +2,10 @@ export type TradeStockRequest = {
   market: string;
   tradeType: string;
   stockSymbol: string;
+  currency: string;
   price: number;
   quantity: number;
-  date: string;
+  tradeDate: string;
   note: string;
 };
 

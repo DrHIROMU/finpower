@@ -12,3 +12,9 @@ export function formatDateTime(isoString: string) {
   const localTimeString = date.toLocaleString(undefined, options);
   return localTimeString;
 }
+
+export function convertDateToUTC(date: string){
+  const localDate = new Date(date);
+  const utcDateString = localDate.toISOString(); 
+  return utcDateString;
+}
