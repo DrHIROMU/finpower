@@ -31,8 +31,8 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<User> createUser(@Valid @RequestBody CreateUserRequest createUserRequest) {
-        User createdUser = userService.createUser(createUserRequest);
-        return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
+        User user = userService.createUser(createUserRequest);
+        return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
     @PatchMapping("{id}/status")

@@ -1,7 +1,6 @@
 package khlin.finpower.user.repository;
 
 import khlin.finpower.user.entity.User;
-import khlin.finpower.user.enums.AccountStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

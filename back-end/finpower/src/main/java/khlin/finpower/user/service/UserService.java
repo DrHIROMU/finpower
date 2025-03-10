@@ -30,14 +30,15 @@ public class UserService {
 
     @Transactional
     public User createUser(CreateUserRequest createUserRequest) {
-        User user = new User();
-        user.setFirstName(createUserRequest.getFirstName());
-        user.setLastName(createUserRequest.getLastName());
-        user.setEmail(createUserRequest.getEmail());
-        user.setPassword(createUserRequest.getPassword());
-        user.setAccountStatus(AccountStatus.ACTIVE);
-        user.setCreatedBy(createUserRequest.getCreatedBy());
-        user.setUpdatedBy(createUserRequest.getUpdatedBy());
+        User user = User.builder()
+                .firstName(createUserRequest.getFirstName())
+                .lastName(createUserRequest.getLastName())
+                .email(createUserRequest.getEmail())
+                .password(createUserRequest.getPassword())
+                .accountStatus(AccountStatus.ACTIVE)
+                .createdBy(createUserRequest.getCreatedBy())
+                .updatedBy(createUserRequest.getUpdatedBy())
+                .build();
 
         return userRepository.save(user);
     }
